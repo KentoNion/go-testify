@@ -11,7 +11,7 @@ import (
 
 // проверка на непустое тело и статус ОК
 func TestBodyNotEmpty(t *testing.T) {
-	req := httptest.NewRequest("GET", "/cafe?count=4?city=moscow", nil)
+	req := httptest.NewRequest("GET", "/cafe?count=4&city=moscow", nil)
 	responseRecorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(mainHandle)
 	handler.ServeHTTP(responseRecorder, req)
@@ -23,7 +23,7 @@ func TestBodyNotEmpty(t *testing.T) {
 
 // не тот город
 func TestWrongCity(t *testing.T) {
-	req := httptest.NewRequest("GET", "/cafe?count=4?city=jopa", nil)
+	req := httptest.NewRequest("GET", "/cafe?count=4&city=jopa", nil)
 	responseRecorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(mainHandle)
 	handler.ServeHTTP(responseRecorder, req)
@@ -35,7 +35,7 @@ func TestWrongCity(t *testing.T) {
 
 // Счётчик больше максимума
 func TestCounterMoreThanMax(t *testing.T) {
-	req := httptest.NewRequest("GET", "/cafe?count=100?city=jopa", nil)
+	req := httptest.NewRequest("GET", "/cafe?count=100&city=mсвoscow", nil)
 	responseRecorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(mainHandle)
 	handler.ServeHTTP(responseRecorder, req)
