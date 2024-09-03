@@ -30,7 +30,7 @@ func TestWrongCity(t *testing.T) {
 
 	require.Equal(t, http.StatusBadRequest, responseRecorder.Code)
 	body := responseRecorder.Body
-	assert.NotEmpty(t, body)
+	assert.Equal(t, body.String(), "wrong city value")
 }
 
 // Счётчик больше максимума
@@ -42,5 +42,5 @@ func TestCounterMoreThanMax(t *testing.T) {
 
 	body := responseRecorder.Body.String()
 	require.Equal(t, http.StatusOK, responseRecorder.Code)
-	assert.Len(t, strings.Split(body, ","), 100)
+	assert.Len(t, strings.Split(body, ","), 4)
 }
